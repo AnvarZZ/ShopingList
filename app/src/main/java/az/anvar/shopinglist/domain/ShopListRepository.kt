@@ -10,5 +10,5 @@ interface ShopListRepository {
 
     fun getShopList(): List<ShopItem>
 
-    fun removeShopItem(shopItemId: Int)
+    fun removeShopItem(shopItem: ShopItem)
 }
