@@ -1,8 +1,8 @@
 package az.anvar.shopinglist.domain
 
-class RemoveShopItemUseCase {
+class RemoveShopItemUseCase(private val shopListRepository: ShopListRepository) {
 
     fun removeShopItem(shopItemId: Int) {
-        TODO()
+        shopListRepository.removeShopItem(shopItemId)
     }
 }

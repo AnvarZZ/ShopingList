@@ -1,8 +1,8 @@
 package az.anvar.shopinglist.domain
 
-class EditShopItemUseCase {
+class EditShopItemUseCase(private val shopListRepository: ShopListRepository) {
 
-    fun updateShopItem(shopItem: ShopItem) {
-        TODO()
+    fun editShopItem(shopItem: ShopItem) {
+        shopListRepository.editShopItem(shopItem)
     }
 }
