@@ -1,7 +1,5 @@
 package az.anvar.shopinglist.presentation
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import az.anvar.shopinglist.data.ShopListRepositoryImpl
 import az.anvar.shopinglist.domain.EditShopItemUseCase
@@ -23,7 +21,7 @@ class MainViewModel : ViewModel() {
         removeShopItemUseCase.removeShopItem(shopItem)
     }
 
-    fun editShopItem(shopItem: ShopItem) {
+    fun changeStateShopItem(shopItem: ShopItem) {
         val item = shopItem.copy(enabled = !shopItem.enabled)
         editShopItemUseCase.editShopItem(item)
     }
