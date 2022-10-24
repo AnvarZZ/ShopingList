@@ -1,9 +1,7 @@
 package az.anvar.shopinglist.presentation
 
-import android.media.MediaRouter.SimpleCallback
-import android.media.browse.MediaBrowser.ItemCallback
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,7 +35,8 @@ class MainActivity : AppCompatActivity() {
             viewModel.changeStateShopItem(it)
         }
         shopListAdapter.onShopItemClickListener = {
-            Log.d(TAG, it.toString())
+            val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+            startActivity(intent)
         }
         viewModel.shopList.observe(this, Observer {
             shopListAdapter.submitList(it)
@@ -62,5 +61,10 @@ class MainActivity : AppCompatActivity() {
         }
         val itemTouchHelper = ItemTouchHelper(callBack)
         itemTouchHelper.attachToRecyclerView(rvShopItems)
+
+        fabAdd.setOnClickListener {
+            val intent = ShopItemActivity.newIntentAddItem(this)
+            startActivity(intent)
+        }
     }
 }
