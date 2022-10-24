@@ -27,7 +27,6 @@ class ShopItemViewModel : ViewModel() {
             val shopItem = ShopItem(inputName, inputCount, true)
             addShopItemUseCase.addShopItem(shopItem)
         }
-
     }
 
 
