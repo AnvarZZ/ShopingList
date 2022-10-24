@@ -1,21 +1,13 @@
 package az.anvar.shopinglist.presentation
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.RecyclerView.Adapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.ListAdapter
 import az.anvar.shopinglist.R
 import az.anvar.shopinglist.domain.ShopItem
 
-class ShopListAdapter : Adapter<ShopListAdapter.ShopItemViewHolder>() {
-
-    var shopList = listOf<ShopItem>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class ShopListAdapter :
+    ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallback()) {
 
     var onShopItemLongClickListener: ((ShopItem) -> Unit)? = null
     var onShopItemClickListener: ((ShopItem) -> Unit)? = null
@@ -31,7 +23,7 @@ class ShopListAdapter : Adapter<ShopListAdapter.ShopItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ShopItemViewHolder, position: Int) {
-        val shopItem = shopList[position]
+        val shopItem = getItem(position)
         holder.tvName.text = shopItem.name
         holder.tvCount.text = shopItem.count.toString()
         holder.itemView.setOnLongClickListener {
@@ -43,19 +35,10 @@ class ShopListAdapter : Adapter<ShopListAdapter.ShopItemViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int {
-        return shopList.size
-    }
-
     override fun getItemViewType(position: Int): Int {
-        if (shopList[position].enabled) return VIEW_TYPE_ENABLED
+        if (getItem(position).enabled) return VIEW_TYPE_ENABLED
         return VIEW_TYPE_DISABLED
 
-    }
-
-    class ShopItemViewHolder(itemView: View) : ViewHolder(itemView) {
-        val tvName = itemView.findViewById<TextView>(R.id.tvName)
-        val tvCount = itemView.findViewById<TextView>(R.id.tvCount)
     }
 
     companion object {

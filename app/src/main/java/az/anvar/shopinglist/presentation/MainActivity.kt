@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             Log.d(TAG, it.toString())
         }
         viewModel.shopList.observe(this, Observer {
-            shopListAdapter.shopList = it
+            shopListAdapter.submitList(it)
         })
 
         val callBack = object : ItemTouchHelper.SimpleCallback(
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = shopListAdapter.shopList[viewHolder.adapterPosition]
+                val item = shopListAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.removeShopItem(item)
             }
         }
