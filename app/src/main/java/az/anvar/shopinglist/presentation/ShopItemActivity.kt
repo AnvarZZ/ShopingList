@@ -11,7 +11,7 @@ import az.anvar.shopinglist.R
 import az.anvar.shopinglist.domain.ShopItem
 import kotlinx.android.synthetic.main.activity_shop_item.*
 
-class ShopItemActivity : AppCompatActivity() {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListener {
 
     private val TAG = "ShopItemActivity_Anvar"
 
@@ -71,5 +71,9 @@ class ShopItemActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_SHOP_ITEM_ID, shopItemId)
             return intent
         }
+    }
+
+    override fun onEditFinished() {
+        finish()
     }
 }

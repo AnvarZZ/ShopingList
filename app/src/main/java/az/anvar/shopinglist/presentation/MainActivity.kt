@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import az.anvar.shopinglist.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListener {
 
     private val TAG = "MainActivity_Anvar"
 
@@ -89,5 +89,9 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.shopItemContainer, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onEditFinished() {
+
     }
 }
