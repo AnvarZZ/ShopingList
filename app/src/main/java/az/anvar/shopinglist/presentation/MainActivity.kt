@@ -2,10 +2,7 @@ package az.anvar.shopinglist.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainerView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -14,8 +11,6 @@ import az.anvar.shopinglist.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListener {
-
-    private val TAG = "MainActivity_Anvar"
 
     private lateinit var binding:ActivityMainBinding
 
@@ -48,9 +43,9 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListene
                 launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
             }
         }
-        viewModel.shopList.observe(this, Observer {
+        viewModel.shopList.observe(this) {
             shopListAdapter.submitList(it)
-        })
+        }
 
         val callBack = object : ItemTouchHelper.SimpleCallback(
             0,

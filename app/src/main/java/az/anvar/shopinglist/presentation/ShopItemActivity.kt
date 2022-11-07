@@ -3,17 +3,11 @@ package az.anvar.shopinglist.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import az.anvar.shopinglist.R
 import az.anvar.shopinglist.domain.ShopItem
-import kotlinx.android.synthetic.main.activity_shop_item.*
 
 class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListener {
-
-    private val TAG = "ShopItemActivity_Anvar"
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
