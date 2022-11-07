@@ -2,6 +2,7 @@ package az.anvar.shopinglist.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.Observer
@@ -9,20 +10,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import az.anvar.shopinglist.R
+import az.anvar.shopinglist.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListener {
 
     private val TAG = "MainActivity_Anvar"
 
+    private lateinit var binding:ActivityMainBinding
+
     private lateinit var viewModel: MainViewModel
     private lateinit var shopListAdapter: ShopListAdapter
-    private var shopItemContainer: FragmentContainerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        shopItemContainer = findViewById(R.id.shopItemContainer)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         shopListAdapter = ShopListAdapter()
         rvShopItems.adapter = shopListAdapter
@@ -69,7 +72,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListene
         val itemTouchHelper = ItemTouchHelper(callBack)
         itemTouchHelper.attachToRecyclerView(rvShopItems)
 
-        fabAdd.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             if (isOnePaneMode()) {
                 val intent = ShopItemActivity.newIntentAddItem(this)
                 startActivity(intent)
@@ -80,7 +83,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditFinishedListene
     }
 
     private fun isOnePaneMode(): Boolean {
-        return shopItemContainer == null
+        return binding.shopItemContainer == null
     }
 
     private fun launchFragment(fragment: Fragment) {
